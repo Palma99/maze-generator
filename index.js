@@ -4,7 +4,7 @@ const BOTTOM = 2;
 const RIGHT = 3;
 
 const sizeScaleFactor = 1.2;
-const cellPerRow = 50;
+const cellPerRow = 20;
 
 let canvasSize = {
   w: 0,
@@ -38,7 +38,6 @@ function setup() {
 
   grid = new Grid(cellPerRow);
   controller = new Controller(grid);
-  // frameRate(20);
   background(52);
 }
 
@@ -46,19 +45,12 @@ function draw() {
   if(startSolving) {
     res = solver.solve();
     if(res !== false) {
-      res.forEach((node) => {
-        // grid.getCell(node.i, node.j).mark('#343232');
-        // const c = grid.getCell(node.i, node.j);
-        // vertex(c.x + c.w/2, c.y + c.w/2);
-        // point(c.x + c.w/2, c.y + c.w/2);
-      });
       startSolving = false;
     }
   } 
 
   if(controller.isComplete() && !startSolving) {
     if(!solver) {
-      // controller.currentCell = null;
       controller.markStartEnd();
       solver = new Solver(controller.getMaze(), controller.getStartIndex(), controller.getEndIndex());
     }
@@ -72,14 +64,11 @@ function draw() {
     stroke('yellow');
     beginShape();
     res.forEach((node, counter) => {
-      // grid.getCell(node.i, node.j).mark('#343232');
       const c = grid.getCell(node.i, node.j);
       if(counter === 0) {
         vertex(c.w/2, c.w/2)
       }
       vertex(c.x + c.w/2, c.y + c.w/2);
-
-      // point(c.x + c.w/2, c.y + c.w/2);
     });
     endShape();
   }

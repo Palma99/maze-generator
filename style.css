@@ -10,8 +10,12 @@ body {
   justify-content: center;
   align-items: center;
   background-color: rgb(34, 34, 34);
+  flex-direction: column;
 }
-/* 
-canvas {
-  border-radius: 10px;
-} */
+
+p {
+  margin-top: 2rem;
+  font-size: 2rem;
+  color: white;
+  font-family: Arial;
+}

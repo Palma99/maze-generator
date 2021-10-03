@@ -48,24 +48,17 @@ class Solver {
         return this.retracePath(this.startNode, this.targetNode);
       }
       this.grid.getCell(currentNode.i, currentNode.j).setColor('purple');
-      // console.log(this.nodes.hasNeighbours(currentNode, true));
       for(let neighbourObj of this.nodes.hasNeighbours(currentNode)) {
         
-        // console.log(neighbour, neighbour.cell.border[neighbour.position]);
-        // console.log(neighbour);
         const neighbour = neighbourObj.cell;
         if(this.isInClosed(neighbour) || neighbour.getBorder()[neighbourObj.borderToRemove] === true) {
           continue;
         }
-        // console.log(neighbour);
-        // console.log(neighbourObj, neighbour.getBorder()[neighbourObj.borderToRemove]);
         const newMovementCostNeighbour = currentNode.gCost + currentNode.getDistance(neighbour);
         if(newMovementCostNeighbour < neighbour.gCost || !this.isInOpen(neighbour)) {
           neighbour.gCost = newMovementCostNeighbour;
           neighbour.hCost = neighbour.getDistance(this.targetNode);
           neighbour.setParent(currentNode);
-          // console.log(neighbour);
-          // console.log(this.nodes.getCell(neighbour.i, neighbour.j));
           if(!this.isInOpen(neighbour)) {
             this.open.push(neighbour);
           }
@@ -92,8 +85,6 @@ class Solver {
     }
     return false;
   }
-
-
 
   retracePath(start, end) {
     let path = [];
